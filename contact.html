@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact</title>
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Flowbite -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+
+</head>
+
+<body class="bg-gray-100">
+
+<!-- Navbar -->
+<nav class="bg-blue-600 text-white p-4 flex justify-between">
+<h1 class="text-xl font-bold">My Website</h1>
+
+<div class="space-x-4">
+<a href="../../../index.html">Home</a>
+<a href="../about/about.html">About</a>
+<a href="../contact/contact.html">Contact</a>
+<a href="../Authentication/signIn.html">Sign In</a>
+<a href="../Authentication/signUp.html">Sign Up</a>
+</div>
+</nav>
+
+<!-- Contact Section -->
+<section class="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+
+<h2 class="text-3xl font-bold mb-6 text-center text-blue-600">Contact Us</h2>
+
+<!-- Form -->
+<form id="contactForm" action="https://formspree.io/f/myknozpa" method="POST" class="space-y-6">
+
+<!-- Name -->
+<div>
+<label class="block mb-2 text-sm font-medium text-gray-900">Full Name</label>
+<input type="text" name="name" id="name"
+class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 focus:ring-blue-500 focus:border-blue-500"
+placeholder="Enter your name">
+<p class="text-red-500 text-sm hidden" id="nameError">Name is required</p>
+</div>
+
+<!-- Email -->
+<div>
+<label class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+<input type="email" name="email" id="email"
+class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 focus:ring-blue-500 focus:border-blue-500"
+placeholder="Enter your email">
+<p class="text-red-500 text-sm hidden" id="emailError">Valid email is required</p>
+</div>
+
+<!-- Subject -->
+<div>
+<label class="block mb-2 text-sm font-medium text-gray-900">Subject</label>
+<input type="text" name="subject" id="subject"
+class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
+placeholder="Enter subject">
+<p class="text-red-500 text-sm hidden" id="subjectError">Subject is required</p>
+</div>
+
+<!-- Message -->
+<div>
+<label class="block mb-2 text-sm font-medium text-gray-900">Message</label>
+<textarea name="message" id="message" rows="4"
+class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
+placeholder="Write your message..."></textarea>
+<p class="text-red-500 text-sm hidden" id="messageError">Message is required</p>
+</div>
+
+<!-- Checkbox (Flowbite component) -->
+<div class="flex items-center">
+<input id="agree" type="checkbox"
+class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
+<label for="agree" class="ml-2 text-sm text-gray-900">I agree to terms</label>
+</div>
+<p class="text-red-500 text-sm hidden" id="agreeError">You must agree first</p>
+
+<!-- Button -->
+<button type="submit"
+class="w-full text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+Send Message
+</button>
+
+</form>
+
+<!-- Success Alert (Flowbite component) -->
+<div id="successMsg" class="hidden mt-4 p-4 text-green-800 bg-green-100 rounded-lg">
+Message sent successfully!
+</div>
+
+</section>
+
+<!-- Validation Script -->
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(e){
+
+let valid = true;
+
+// Get values
+let name = document.getElementById("name").value.trim();
+let email = document.getElementById("email").value.trim();
+let subject = document.getElementById("subject").value.trim();
+let message = document.getElementById("message").value.trim();
+let agree = document.getElementById("agree").checked;
+
+// Reset errors
+document.querySelectorAll("p[id$='Error']").forEach(el => el.classList.add("hidden"));
+
+// Name
+if(name === ""){
+document.getElementById("nameError").classList.remove("hidden");
+valid = false;
+}
+
+// Email
+if(email === "" || !email.includes("@")){
+document.getElementById("emailError").classList.remove("hidden");
+valid = false;
+}
+
+// Subject
+if(subject === ""){
+document.getElementById("subjectError").classList.remove("hidden");
+valid = false;
+}
+
+// Message
+if(message === ""){
+document.getElementById("messageError").classList.remove("hidden");
+valid = false;
+}
+
+// Checkbox
+if(!agree){
+document.getElementById("agreeError").classList.remove("hidden");
+valid = false;
+}
+
+// Prevent submit if invalid
+if(!valid){
+e.preventDefault();
+}
+});
+</script>
+
+</body>
+</html>
